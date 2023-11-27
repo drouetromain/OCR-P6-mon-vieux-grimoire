@@ -13,7 +13,7 @@ router.post('/books', auth, multer, stuffCtrl.createBook);
 router.post('/books/:id/rating', auth, multer, ratingCtrl.modifyRating);
 
 router.put('/books/:id', auth, multer, stuffCtrl.modifyBook);
-router.delete('/:id', auth, stuffCtrl.deleteBook);
+router.delete('/books/:id', auth, stuffCtrl.deleteBook);
 
 
 module.exports = router;
