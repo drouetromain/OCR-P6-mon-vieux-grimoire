@@ -28,6 +28,16 @@ exports.modifyBook = (req, res, next) => {
             if (book.userId != req.auth.userId) {
                 res.status(401).json({ message: 'Non-autorisé !' });
             } else {
+                const filePath = './controllers/images/' + book.imageUrl.split('/').slice(-1)[0];
+                console.log(filePath);
+                if (fs.existsSync(filePath)) {
+                    try {
+                        fs.unlinkSync(filePath)
+                        console.log('File deleted successfully')
+                    }   catch (err) { console.error(err) }
+                } else {
+                    console.log('File not found')
+                }
                 Book.updateOne({ _id: req.params.id }, { ...bookObject, _id: req.params.id })
                     .then(() => res.status(200).json({ message: 'Objet modifié!' }))
                     .catch(error => res.status(401).json({ error }));
@@ -44,8 +54,8 @@ exports.deleteBook = (req, res, next) => {
             if (book.userId != req.auth.userId) {
                 res.status(401).json({ message: 'Non-autorisé !' });
             } else {
-                const filename = book.imageUrl.split('/images/')[1];
-                fs.unlink(`images/${filename}`, () => {
+                const filePath = './controllers/images/' + book.imageUrl.split('/').slice(-1)[0];
+                fs.unlink(`${filePath}`, () => {
                     Book.deleteOne({ _id: req.params.id })
                         .then(() => { res.status(200).json({ message: 'Objet supprimé !' }) })
                         .catch(error => res.status(401).json({ error }));
