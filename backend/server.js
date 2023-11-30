@@ -46,4 +46,4 @@ server.on('listening', () => {
 });
 
 server.listen(port);
-console.log('Process ENV' + process.env);
+console.log(process.env);

@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
 const path = require('path');
+require('dotenv').config();
 // const cors = require('cors');
 
-mongoose.connect('mongodb+srv://ocr-p7:ExwTfefM4BV29QpR@cluster0.gjqxplf.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.MONGODB_CONNECT,
+// mongoose.connect('mongodb+srv://ocr-p7:ExwTfefM4BV29QpR@cluster0.gjqxplf.mongodb.net/?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
