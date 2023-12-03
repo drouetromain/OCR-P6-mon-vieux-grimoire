@@ -27,7 +27,6 @@ function BookRatingForm({
     }
   }, [formState]);
   const onSubmit = async () => {
-    console.log(userRated);
     if (!connectedUser || !auth) {
       navigate(APP_ROUTES.SIGN_IN);
     }
